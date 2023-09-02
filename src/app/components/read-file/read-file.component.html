@@ -8,4 +8,8 @@
   
       <a *ngIf="winner!=0" class="btn btn-primary stretched-link" [href]="fileUrl" download="juegoResultado.txt">Archivo de Salida</a>
     </div>
+
+    <div>
+      <app-table *ngIf="winner!=0" [params]="params" [player1Points]="player1Points" [player2Points]="player2Points"></app-table>
+    </div>
   </div>

@@ -5,11 +5,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { ReadFileComponent } from './components/read-file/read-file.component';
 import { HttpClientModule } from '@angular/common/http';
+import { TableComponent } from './components/table/table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ReadFileComponent
+    ReadFileComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,

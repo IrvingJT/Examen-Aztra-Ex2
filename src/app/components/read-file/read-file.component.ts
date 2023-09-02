@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from  '@angular/common/http';
-import { delay } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-read-file',
@@ -39,13 +38,25 @@ export class ReadFileComponent implements OnInit {
     fileReader.onloadend = (i) => {
 
       let rounds = parseInt(this.params[0]);
+      console.log(rounds)
+      console.log(this.params.length-1)
+      const Swal = require('sweetalert2');
 
-      if(rounds <= 10000)
+      if(rounds <= 10000 && rounds == this.params.length-1)
       {
         this.params = this.params.filter((item,index) => index!=0 );
         this.obtainingDifferences(this.params);
       }
-      
+      else
+      {
+        Swal.fire({
+          title: '¡Error!',
+          text: 'El numero de rondas debe ser menor o igual a 10000 y debe coincidir con la lista de puntuaciones',
+          icon: 'error',
+          confirmButtonText: 'Cool'
+        })
+        return;
+      }
 
     }
     
