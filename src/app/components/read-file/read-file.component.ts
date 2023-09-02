@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ViewChild } from '@angular/core';
 import Swal from 'sweetalert2'
 
 @Component({
@@ -16,6 +17,9 @@ export class ReadFileComponent implements OnInit {
   player2Points: number[] = [];
   differencesArray: number[] = [];
   winner: number = 0;
+  downloadableFile = false;
+
+  @ViewChild('myInfileFieldput') myInputVariable!: ElementRef;
 
   constructor(private sanitizer: DomSanitizer) { }
 
@@ -46,6 +50,9 @@ export class ReadFileComponent implements OnInit {
       {
         this.params = this.params.filter((item,index) => index!=0 );
         this.obtainingDifferences(this.params);
+        // this.myInputVariable.nativeElement.value = "";
+        // console.log(this.myInputVariable)
+        this.downloadableFile = true;
       }
       else
       {
@@ -58,8 +65,9 @@ export class ReadFileComponent implements OnInit {
         return;
       }
 
+      e.target.value = "";
+
     }
-    
   }
 
   obtainingDifferences = (params:string[]) =>{
@@ -115,6 +123,14 @@ export class ReadFileComponent implements OnInit {
     const blob = new Blob([outputInfo], { type: 'application/octet-stream' });
 
     this.fileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(blob));
+  }
+
+  checkIfDownloadableFileExists = () =>{
+    if(!this.downloadableFile)
+    {
+      return;
+    }
+    this.downloadableFile = false;
   }
 
 }
