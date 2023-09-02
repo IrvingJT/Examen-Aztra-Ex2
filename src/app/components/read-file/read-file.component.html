@@ -4,9 +4,9 @@
     <div class="card-body">
       <h5 class="card-title">Cargar archivo</h5>
       <p class="card-text">De click en el botón y seleccione el archivo de entrada</p>
-      <input class="form-control" type='file' (change)="obtainParamsFromFile($event)"> <br>
+      <input class="form-control" type='file' (change)="obtainParamsFromFile($event)" #fileField> <br>
   
-      <a *ngIf="winner!=0" class="btn btn-primary stretched-link" [href]="fileUrl" download="juegoResultado.txt">Archivo de Salida</a>
+      <a (click)="checkIfDownloadableFileExists()" *ngIf="winner!=0 && downloadableFile" class="btn btn-primary stretched-link" [href]="fileUrl" download="juegoResultado.txt">Archivo de Salida</a>
     </div>
 
     <div>
