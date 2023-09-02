@@ -1,0 +1,30 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Ronda</th>
+        <th scope="col">Jugador 1</th>
+        <th scope="col">Jugador 2</th>
+        <th scope="col">Líder</th>
+        <th scope="col">Ventaja</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let param of params; let i = index">
+        <th scope="row" class="center">{{i + 1}}</th>
+        <td class="center">{{player1Points[i]}}</td>
+        <td class="center">{{player2Points[i]}}</td>
+        <td>
+            {{
+                player1Points[i] > player2Points[i] ? 'Jugador 1':'Jugador 2'    
+            }}
+        </td>
+        <td>
+            {{
+                player1Points[i] > player2Points[i] ?
+                player1Points[i] - player2Points[i] :
+                player2Points[i] - player1Points[i] 
+            }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
