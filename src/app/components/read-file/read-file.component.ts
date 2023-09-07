@@ -76,16 +76,29 @@ export class ReadFileComponent implements OnInit {
     let val1: number;
     let val2: number;
 
-    this.params.map(item => {
+    this.params.map((item, index) => {
       paramInPairs = item.split(' ');
 
       val1= parseInt(paramInPairs[0]);
       val2= parseInt(paramInPairs[1]);
 
-      this.differencesArray.push(Math.abs(val1-val2));
 
-      this.player1Points.push(val1);
-      this.player2Points.push(val2);
+
+      if(index == 0)
+      {
+        this.player1Points.push(val1);
+        this.player2Points.push(val2);
+        this.differencesArray.push(Math.abs(val1-val2));        
+      }
+      else
+      {
+        
+        this.player1Points.push(val1 + this.player1Points[index-1]);
+        this.player2Points.push(val2 + this.player2Points[index-1]);
+
+        this.differencesArray.push(Math.abs(this.player1Points[index]-this.player2Points[index])); 
+
+      }
     });
 
     this.reviewOfDifferences();
